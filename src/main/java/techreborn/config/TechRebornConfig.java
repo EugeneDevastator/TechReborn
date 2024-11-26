@@ -680,6 +680,9 @@ public class TechRebornConfig {
 	@Config(config = "misc", category = "general", key = "vanillaUnlockRecipes", comment = "Enable recipe unlocks only with vanilla mechanic, instead of getting all of them at once")
 	public static boolean vanillaUnlockRecipes = true;
 
+	@Config(config = "misc", category = "general", key = "replacePumpedFluids", comment = "If enabled pump will replace fluid blocks, when turned off will remove water block - good for finite fluids")
+	public static boolean replacePumpedFluids = true;
+
 	@Config(config = "misc", category = "nuke", key = "fusetime", comment = "Nuke fuse time (ticks)")
 	public static int nukeFuseTime = 400;
 
@@ -759,6 +762,9 @@ public class TechRebornConfig {
 	@Config(config = "world", category = "generation", key = "enableSodaliteOreGeneration", comment = "When enabled and enableOreGeneration isn't disabled, sodalite ores will generate in the world")
 	public static boolean enableSodaliteOreGeneration = true;
 
+	@Config(config = "world", category = "generation", key = "enableOresInEnd", comment = "when disabled will generate ores from end in nether and overworld instead.")
+	public static boolean enableOresInEnd = true;
+
 	@Config(config = "world", category = "generation", key = "enableSphaleriteOreGeneration", comment = "When enabled and enableOreGeneration isn't disabled, sphalerite ores will generate in the world")
 	public static boolean enableSphaleriteOreGeneration = true;
 
@@ -779,4 +785,5 @@ public class TechRebornConfig {
 
 	@Config(config = "world", category = "generation", key = "enableElectricianGeneration", comment = "When enabled electrician houses can generate in villages")
 	public static boolean enableElectricianGeneration = true;
+
 }
