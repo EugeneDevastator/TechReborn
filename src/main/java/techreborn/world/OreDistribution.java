@@ -41,13 +41,24 @@ public enum OreDistribution {
 	PYRITE(6, 6, YOffset.aboveBottom(0), 128, TargetDimension.NETHER, TechRebornConfig.enablePyriteOreGeneration),
 	RUBY(6, 8, YOffset.fixed(20), 120, TargetDimension.OVERWORLD, UniformIntProvider.create(2,6), TechRebornConfig.enableRubyOreGeneration),
 	SAPPHIRE(6, 7, YOffset.fixed(20), 120, TargetDimension.OVERWORLD, UniformIntProvider.create(2,6), TechRebornConfig.enableSapphireOreGeneration),
-	SHELDONITE(6, 4, YOffset.aboveBottom(0), 360, TargetDimension.END, TechRebornConfig.enableSheldoniteOreGeneration),
 	SILVER(6, 16, YOffset.aboveBottom(40), 60,TargetDimension.OVERWORLD, TechRebornConfig.enableSilverOreGeneration),
-	SODALITE(6, 4, YOffset.aboveBottom(0), 360, TargetDimension.END, TechRebornConfig.enableSodaliteOreGeneration),
+	//SODALITE(6, 4, YOffset.aboveBottom(0), 360, TargetDimension.END, TechRebornConfig.enableSodaliteOreGeneration),
 	SPHALERITE(6, 4, YOffset.aboveBottom(0), 128, TargetDimension.NETHER, TechRebornConfig.enableSphaleriteOreGeneration),
 	TIN(8, 16, YOffset.fixed(25), 80, TargetDimension.OVERWORLD, TechRebornConfig.enableTinOreGeneration),
 	TUNGSTEN(6, 3, YOffset.aboveBottom(0), 360, TargetDimension.END, TechRebornConfig.enableTungstenOreGeneration),
-	DEEPSLATE_SODALITE(6, 14, YOffset.aboveBottom(0), 360, TargetDimension.OVERWORLD, !TechRebornConfig.enableOresInEnd);
+	//SODALITE(60, 21, YOffset.aboveBottom(10), 160, TechRebornConfig.enableOresInEnd ? TargetDimension.END : TargetDimension.OVERWORLD, true);
+	SODALITE_END(6, 4, YOffset.aboveBottom(0), 360, TargetDimension.END, true),
+	SODALITE_OVERWORLD(60, 21, YOffset.aboveBottom(10), 160, TargetDimension.OVERWORLD, true),
+	SHELDONITE_END(6, 4, YOffset.aboveBottom(0), 360, TargetDimension.END, TechRebornConfig.enableSheldoniteOreGeneration),
+	SHELDONITE_NETHER(6, 4, YOffset.belowTop(20), 360, TargetDimension.NETHER, TechRebornConfig.enableSheldoniteOreGeneration);
+
+	public static OreDistribution getSodalite() {
+		return TechRebornConfig.enableOresInEnd ? SODALITE_END : SODALITE_OVERWORLD;
+	}
+
+	public static OreDistribution getSheldonite() {
+		return TechRebornConfig.enableOresInEnd ? SHELDONITE_END : SHELDONITE_NETHER;
+	}
 
 	public final int veinSize;
 	public final int veinsPerChunk;

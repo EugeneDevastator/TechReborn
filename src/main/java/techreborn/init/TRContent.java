@@ -472,9 +472,13 @@ public class TRContent {
 		PYRITE(OreDistribution.PYRITE),
 		RUBY(OreDistribution.RUBY),
 		SAPPHIRE(OreDistribution.SAPPHIRE),
-		SHELDONITE(OreDistribution.SHELDONITE),
+		SHELDONITE(OreDistribution.getSheldonite()),
 		SILVER(OreDistribution.SILVER),
-		SODALITE(OreDistribution.SODALITE),
+		// this doesnt work, because at this point it is compiled once...
+		// SODALITE(TechRebornConfig.enableOresInEnd ? OreDistribution.SODALITE : OreDistribution.SODALITE_OVR),
+		// need to use bool flag
+		// SODALITE(OreDistribution.SODALITE_OVR) // this worked
+		SODALITE(OreDistribution.getSodalite()),
 		SPHALERITE(OreDistribution.SPHALERITE),
 		TIN(OreDistribution.TIN),
 		TUNGSTEN(OreDistribution.TUNGSTEN, true),

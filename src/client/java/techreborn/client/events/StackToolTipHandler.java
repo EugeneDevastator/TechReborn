@@ -67,7 +67,7 @@ public class StackToolTipHandler implements ItemTooltipCallback {
 		for (TRContent.Ores ore : TRContent.Ores.values()) {
 			if (ore.isDeepslate()) {
 				TRContent.Ores normal = ore.getUnDeepslate();
-				if (normal.distribution != null && normal.distribution.dimension != TargetDimension.OVERWORLD)
+				if (ore.distribution == null && normal.distribution != null && normal.distribution.dimension != TargetDimension.OVERWORLD)
 					UNOBTAINABLE_ORES.add(ore.block);
 			}
 		}
