@@ -85,6 +85,7 @@ class TRConventionalTags {
 	public static final TagKey<Item> LEAD_INGOTS = register("ingots/lead")
 	public static final TagKey<Item> LEAD_ORES = register("ores/lead")
 	public static final TagKey<Item> NETHERITE_NUGGETS = register("nuggets/netherite")
+	public static final TagKey<Item> NICKEL_ORES = register("ores/nickel")
 	public static final TagKey<Item> NICKEL_BLOCKS = register("storage_blocks/nickel")
 	public static final TagKey<Item> NICKEL_INGOTS = register("ingots/nickel")
 	public static final TagKey<Item> OBSIDIAN_DUSTS = register("dusts/obsidian")

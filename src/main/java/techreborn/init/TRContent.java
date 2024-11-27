@@ -580,7 +580,6 @@ public class TRContent {
 		PERIDOT(5f, 6f),
 		PLATINUM(5f, 6f),
 		RAW_IRIDIUM(2f, 2f),
-		RAW_NICKEL(2f, 2f),
 		RAW_LEAD(2f, 2f),
 		RAW_SILVER(2f, 2f),
 		RAW_TIN(2f, 2f),

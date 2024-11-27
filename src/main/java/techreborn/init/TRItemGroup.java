@@ -121,7 +121,6 @@ public class TRItemGroup {
 			TRContent.Parts.CARBON_FIBER,
 			TRContent.Parts.CARBON_MESH);
 		entries.addAfter(TRContent.RawMetals.TIN, TRContent.StorageBlocks.RAW_TIN);
-		entries.addAfter(TRContent.RawMetals.NICKEL, TRContent.StorageBlocks.RAW_NICKEL);
 		entries.addAfter(TRContent.RawMetals.LEAD, TRContent.StorageBlocks.RAW_LEAD);
 		entries.addAfter(TRContent.RawMetals.SILVER, TRContent.StorageBlocks.RAW_SILVER);
 		entries.addAfter(TRContent.RawMetals.IRIDIUM, TRContent.StorageBlocks.RAW_IRIDIUM);
@@ -648,6 +647,7 @@ public class TRItemGroup {
 		// raw / gem
 		entries.addBefore(Items.RAW_IRON, TRContent.RawMetals.TIN);
 		entries.addAfter(Items.RAW_COPPER,
+			TRContent.RawMetals.NICKEL,
 			TRContent.RawMetals.LEAD,
 			TRContent.RawMetals.SILVER);
 		entries.addBefore(Items.EMERALD,
