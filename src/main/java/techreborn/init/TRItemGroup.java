@@ -121,10 +121,10 @@ public class TRItemGroup {
 			TRContent.Parts.CARBON_FIBER,
 			TRContent.Parts.CARBON_MESH);
 		entries.addAfter(TRContent.RawMetals.TIN, TRContent.StorageBlocks.RAW_TIN);
+		entries.addAfter(TRContent.RawMetals.NICKEL, TRContent.StorageBlocks.RAW_NICKEL);
 		entries.addAfter(TRContent.RawMetals.LEAD, TRContent.StorageBlocks.RAW_LEAD);
 		entries.addAfter(TRContent.RawMetals.SILVER, TRContent.StorageBlocks.RAW_SILVER);
 		entries.addAfter(TRContent.RawMetals.IRIDIUM, TRContent.StorageBlocks.RAW_IRIDIUM);
-		entries.addAfter(TRContent.RawMetals.TUNGSTEN, TRContent.StorageBlocks.RAW_TUNGSTEN);
 		for (TRContent.StorageBlocks block : TRContent.StorageBlocks.values()) {
 			entries.addAfter(block,
 				block.getStairsBlock(),
@@ -406,7 +406,7 @@ public class TRItemGroup {
 	}
 
 	private static void addNaturalBlocks(FabricItemGroupEntries entries) {
-		entries.addBefore(Items.IRON_ORE, TRContent.Ores.TIN, TRContent.Ores.DEEPSLATE_TIN, TRContent.Ores.DEEPSLATE_SODALITE);
+		entries.addBefore(Items.IRON_ORE, TRContent.Ores.TIN, TRContent.Ores.NICKEL, TRContent.Ores.DEEPSLATE_TIN, TRContent.Ores.DEEPSLATE_SODALITE);
 		entries.addAfter(Items.DEEPSLATE_COPPER_ORE,
 			TRContent.Ores.LEAD, TRContent.Ores.DEEPSLATE_LEAD,
 			TRContent.Ores.SILVER, TRContent.Ores.DEEPSLATE_SILVER);

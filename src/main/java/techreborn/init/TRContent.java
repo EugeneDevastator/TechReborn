@@ -482,6 +482,7 @@ public class TRContent {
 		SPHALERITE(OreDistribution.SPHALERITE),
 		TIN(OreDistribution.TIN),
 		TUNGSTEN(OreDistribution.TUNGSTEN, true),
+		NICKEL(OreDistribution.NICKEL),
 
 		DEEPSLATE_BAUXITE(BAUXITE),
 		DEEPSLATE_GALENA(GALENA),
@@ -579,6 +580,7 @@ public class TRContent {
 		PERIDOT(5f, 6f),
 		PLATINUM(5f, 6f),
 		RAW_IRIDIUM(2f, 2f),
+		RAW_NICKEL(2f, 2f),
 		RAW_LEAD(2f, 2f),
 		RAW_SILVER(2f, 2f),
 		RAW_TIN(2f, 2f),
@@ -830,7 +832,7 @@ public class TRContent {
 	}
 
 	public enum RawMetals implements ItemConvertible, TagConvertible<Item> {
-		IRIDIUM, LEAD, SILVER, TIN, TUNGSTEN;
+		IRIDIUM, LEAD, SILVER, TIN, TUNGSTEN, NICKEL;
 
 		private final String name;
 		private final Item item;
