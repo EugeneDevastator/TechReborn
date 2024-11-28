@@ -53,6 +53,7 @@ import net.minecraft.world.gen.placementmodifier.*
 import net.minecraft.world.gen.stateprovider.BlockStateProvider
 import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer
+import org.spongepowered.include.com.google.common.collect.ImmutableList
 import techreborn.blocks.misc.BlockRubberLog
 import techreborn.init.ModFluids
 import techreborn.init.TRContent
@@ -96,7 +97,8 @@ class TRDynamicContent {
 	private static ConfiguredFeature createOreConfiguredFeature(TROreFeatureConfig config) {
 		def oreFeatureConfig = switch (config.ore().distribution.dimension) {
 			case TargetDimension.OVERWORLD -> createOverworldOreFeatureConfig(config)
-			case TargetDimension.NETHER -> createSimpleOreFeatureConfig(new BlockMatchRuleTest(Blocks.NETHERRACK), config)
+			case TargetDimension.NETHER -> createSimpleOreFeatureConfig(
+				new TagMatchRuleTest(BlockTags.BASE_STONE_NETHER), config)
 			case TargetDimension.END -> createSimpleOreFeatureConfig(new BlockStateMatchRuleTest(Blocks.END_STONE.getDefaultState()), config)
 		} //here
 		return new ConfiguredFeature<>(Feature.ORE, oreFeatureConfig)

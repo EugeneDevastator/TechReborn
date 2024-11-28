@@ -471,6 +471,7 @@ public class TRContent {
 
 		PERIDOT(OreDistribution.PERIDOT_END),
 		PERIDOT_STONE(OreDistribution.PERIDOT_OVERWORLD),
+		PERIDOT_NETHER(OreDistribution.PERIDOT_NETHER),
 
 		PYRITE(OreDistribution.PYRITE),
 		RUBY(OreDistribution.RUBY),
