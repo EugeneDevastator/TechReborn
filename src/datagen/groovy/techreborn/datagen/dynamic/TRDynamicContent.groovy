@@ -24,6 +24,7 @@
 
 package techreborn.datagen.dynamic
 
+import net.fabricmc.fabric.api.biome.v1.BiomeSelectors
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
 import net.minecraft.entity.damage.DamageEffects
@@ -41,6 +42,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.math.intprovider.ConstantIntProvider
 import net.minecraft.world.Heightmap
+import net.minecraft.world.biome.BiomeKeys
 import net.minecraft.world.gen.YOffset
 import net.minecraft.world.gen.blockpredicate.BlockPredicate
 import net.minecraft.world.gen.feature.*
@@ -96,8 +98,7 @@ class TRDynamicContent {
 			case TargetDimension.OVERWORLD -> createOverworldOreFeatureConfig(config)
 			case TargetDimension.NETHER -> createSimpleOreFeatureConfig(new BlockMatchRuleTest(Blocks.NETHERRACK), config)
 			case TargetDimension.END -> createSimpleOreFeatureConfig(new BlockStateMatchRuleTest(Blocks.END_STONE.getDefaultState()), config)
-		}
-
+		} //here
 		return new ConfiguredFeature<>(Feature.ORE, oreFeatureConfig)
 	}
 

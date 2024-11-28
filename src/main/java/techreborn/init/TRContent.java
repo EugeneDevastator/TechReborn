@@ -468,33 +468,41 @@ public class TRContent {
 		GALENA(OreDistribution.GALENA),
 		IRIDIUM(OreDistribution.IRIDIUM, true),
 		LEAD(OreDistribution.LEAD),
-		PERIDOT(OreDistribution.PERIDOT),
+
+		PERIDOT(OreDistribution.PERIDOT_END),
+		PERIDOT_STONE(OreDistribution.PERIDOT_OVERWORLD),
+
 		PYRITE(OreDistribution.PYRITE),
 		RUBY(OreDistribution.RUBY),
 		SAPPHIRE(OreDistribution.SAPPHIRE),
-		SHELDONITE(OreDistribution.getSheldonite()),
+
+		SHELDONITE(OreDistribution.SHELDONITE_END),
+		SHELDONITE_NETHER(OreDistribution.SHELDONITE_NETHER),
+
 		SILVER(OreDistribution.SILVER),
-		// this doesnt work, because at this point it is compiled once...
-		// SODALITE(TechRebornConfig.enableOresInEnd ? OreDistribution.SODALITE : OreDistribution.SODALITE_OVR),
-		// need to use bool flag
-		// SODALITE(OreDistribution.SODALITE_OVR) // this worked
-		SODALITE(OreDistribution.getSodalite()),
+
+		SODALITE(OreDistribution.SODALITE_END),
+		SODALITE_STONE(OreDistribution.SODALITE_OVERWORLD),
+
 		SPHALERITE(OreDistribution.SPHALERITE),
 		TIN(OreDistribution.TIN),
-		TUNGSTEN(OreDistribution.TUNGSTEN, true),
+
+		TUNGSTEN(OreDistribution.TUNGSTEN_END, true),
+		TUNGSTEN_NETHER(OreDistribution.TUNGSTEN_NETHER, true),
+
 		NICKEL(OreDistribution.NICKEL),
-		NICKELNETHER(OreDistribution.NICKELNETHER),
+		NICKEL_NETHER(OreDistribution.NICKEL_NETHER),
 
 		DEEPSLATE_BAUXITE(BAUXITE),
 		DEEPSLATE_GALENA(GALENA),
 		DEEPSLATE_IRIDIUM(IRIDIUM),
 		DEEPSLATE_LEAD(LEAD),
-		DEEPSLATE_PERIDOT(PERIDOT),
+		DEEPSLATE_PERIDOT(PERIDOT_STONE),
 		DEEPSLATE_RUBY(RUBY),
 		DEEPSLATE_SAPPHIRE(SAPPHIRE),
 		DEEPSLATE_SHELDONITE(SHELDONITE),
 		DEEPSLATE_SILVER(SILVER),
-		DEEPSLATE_SODALITE(SODALITE),
+		DEEPSLATE_SODALITE(SODALITE_STONE),
 		DEEPSLATE_TIN(TIN),
 		DEEPSLATE_TUNGSTEN(TUNGSTEN);
 
@@ -510,7 +518,9 @@ public class TRContent {
 			this.industrial = industrial;
 			InitUtils.setup(block, name + "_ore");
 			tag = TagKey.of(RegistryKeys.ITEM, Identifier.of("c", "ores/" +
-					(name.startsWith("deepslate_") ? name.substring(name.indexOf('_')+1): name)));
+				(name.startsWith("deepslate_") ? name.substring(name.indexOf('_')+1) : name)
+					.replaceAll("_(end|nether|stone)$", "")));
+
 			this.distribution = distribution;
 		}
 
