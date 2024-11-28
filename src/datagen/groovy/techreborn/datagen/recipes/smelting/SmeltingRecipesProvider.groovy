@@ -59,6 +59,7 @@ class SmeltingRecipesProvider extends TechRebornRecipesProvider {
 				(TRContent.RawMetals.LEAD.asTag())     : TRContent.Ingots.LEAD,
 				(TRContent.Dusts.NICKEL.asTag())       : TRContent.Ingots.NICKEL,
 				(TRContent.Ores.NICKEL.asTag())        : TRContent.Ingots.NICKEL,
+				(TRContent.Ores.NICKELNETHER.asTag())        : TRContent.Ingots.NICKEL,
 				(TRContent.RawMetals.NICKEL.asTag())   : TRContent.Ingots.NICKEL,
 				(TRContent.Ores.SHELDONITE.asTag())    : TRContent.Ingots.PLATINUM,
 				(TRContent.Dusts.PLATINUM.asTag())     : TRContent.Ingots.PLATINUM,

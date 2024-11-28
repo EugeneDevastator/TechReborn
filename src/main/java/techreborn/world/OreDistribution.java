@@ -47,6 +47,7 @@ public enum OreDistribution {
 	TIN(8, 16, YOffset.fixed(25), 80, TargetDimension.OVERWORLD, TechRebornConfig.enableTinOreGeneration),
 	TUNGSTEN(6, 3, YOffset.aboveBottom(0), 360, TargetDimension.END, TechRebornConfig.enableTungstenOreGeneration),
 	NICKEL(30, 15, YOffset.aboveBottom(100), 360, TargetDimension.OVERWORLD, true),
+	NICKELNETHER(30, 15, YOffset.aboveBottom(0), 360, TargetDimension.NETHER, true),
 	//SODALITE(60, 21, YOffset.aboveBottom(10), 160, TechRebornConfig.enableOresInEnd ? TargetDimension.END : TargetDimension.OVERWORLD, true);
 	SODALITE_END(6, 4, YOffset.aboveBottom(0), 360, TargetDimension.END, true),
 	SODALITE_OVERWORLD(30, 21, YOffset.aboveBottom(10), 160, TargetDimension.OVERWORLD, true),

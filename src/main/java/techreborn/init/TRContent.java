@@ -483,6 +483,7 @@ public class TRContent {
 		TIN(OreDistribution.TIN),
 		TUNGSTEN(OreDistribution.TUNGSTEN, true),
 		NICKEL(OreDistribution.NICKEL),
+		NICKELNETHER(OreDistribution.NICKELNETHER),
 
 		DEEPSLATE_BAUXITE(BAUXITE),
 		DEEPSLATE_GALENA(GALENA),
