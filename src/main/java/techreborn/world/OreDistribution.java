@@ -33,7 +33,7 @@ import java.util.Objects;
 
 public enum OreDistribution {
 	BAUXITE(6, 12, YOffset.aboveBottom(0), 20, TargetDimension.OVERWORLD, TechRebornConfig.enableBauxiteOreGeneration),
-	CINNABAR(6, 5, YOffset.aboveBottom(0), 128, TargetDimension.NETHER, TechRebornConfig.enableCinnabarOreGeneration),
+	CINNABAR(6, 5, YOffset.aboveBottom(0), 100, TargetDimension.NETHER, TechRebornConfig.enableCinnabarOreGeneration),
 	GALENA(8, 12, YOffset.aboveBottom(25), 40, TargetDimension.OVERWORLD, TechRebornConfig.enableGalenaOreGeneration),
 	IRIDIUM(3, 4, YOffset.aboveBottom(0), 0, TargetDimension.OVERWORLD, TechRebornConfig.enableIridiumOreGeneration),
 	LEAD(6, 16, YOffset.aboveBottom(40), 40, TargetDimension.OVERWORLD, TechRebornConfig.enableLeadOreGeneration),
@@ -48,12 +48,12 @@ public enum OreDistribution {
 	SAPPHIRE(6, 7, YOffset.fixed(40), 110, TargetDimension.OVERWORLD, UniformIntProvider.create(2,6), TechRebornConfig.enableSapphireOreGeneration),
 	SILVER(6, 16, YOffset.aboveBottom(40), 60,TargetDimension.OVERWORLD, TechRebornConfig.enableSilverOreGeneration),
 	//SODALITE(6, 4, YOffset.aboveBottom(0), 360, TargetDimension.END, TechRebornConfig.enableSodaliteOreGeneration),
-	SPHALERITE(6, 4, YOffset.aboveBottom(40), 128, TargetDimension.NETHER, TechRebornConfig.enableSphaleriteOreGeneration),
+	SPHALERITE(6, 4, YOffset.aboveBottom(40), 90, TargetDimension.NETHER, TechRebornConfig.enableSphaleriteOreGeneration),
 	TIN(8, 16, YOffset.fixed(25), 80, TargetDimension.OVERWORLD, TechRebornConfig.enableTinOreGeneration),
 
 	TUNGSTEN_END(6, 3, YOffset.aboveBottom(0), 360, TargetDimension.END, TechRebornConfig.enableTungstenOreGeneration),
 	// from 30 to 401
-	TUNGSTEN_NETHER(4, 10, YOffset.fixed(40), 70, TargetDimension.NETHER, TechRebornConfig.enableTungstenOreGeneration),
+	TUNGSTEN_NETHER(4, 10, YOffset.fixed(30), 50, TargetDimension.NETHER, TechRebornConfig.enableTungstenOreGeneration),
 
 	NICKEL(7, 10, YOffset.fixed(110), 200, TargetDimension.OVERWORLD, true),
 	NICKEL_NETHER(30, 15, YOffset.aboveBottom(0), 360, TargetDimension.NETHER, false),
