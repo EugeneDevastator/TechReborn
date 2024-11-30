@@ -38,31 +38,27 @@ public enum OreDistribution {
 	IRIDIUM(3, 4, YOffset.aboveBottom(0), 0, TargetDimension.OVERWORLD, TechRebornConfig.enableIridiumOreGeneration),
 	LEAD(6, 16, YOffset.aboveBottom(40), 40, TargetDimension.OVERWORLD, TechRebornConfig.enableLeadOreGeneration),
 
-	PERIDOT_END(6, 6, YOffset.aboveBottom(0), 360, TargetDimension.END, UniformIntProvider.create(2,6), TechRebornConfig.enablePeridotOreGeneration),
-	PERIDOT_OVERWORLD(1, 1, YOffset.aboveBottom(0), 110, TargetDimension.OVERWORLD, UniformIntProvider.create(2,6), false),
-	// this must be rare
-	PERIDOT_NETHER(12, 2, YOffset.aboveBottom(0), 40, TargetDimension.NETHER, UniformIntProvider.create(2,6), TechRebornConfig.enablePeridotOreGeneration),
+	PERIDOT_END(6, 6, YOffset.aboveBottom(0), 360, TargetDimension.END, UniformIntProvider.create(2,6), TechRebornConfig.enablePeridotOreGeneration && TechRebornConfig.enableOresInEnd),
+	PERIDOT_NETHER(12, 2, YOffset.aboveBottom(3), 40, TargetDimension.NETHER, UniformIntProvider.create(2,6), TechRebornConfig.enablePeridotOreGeneration && !TechRebornConfig.enableOresInEnd),
 
 	PYRITE(6, 6, YOffset.aboveBottom(80), 128, TargetDimension.NETHER, TechRebornConfig.enablePyriteOreGeneration),
 	RUBY(6, 8, YOffset.fixed(20), 110, TargetDimension.OVERWORLD, UniformIntProvider.create(2,6), TechRebornConfig.enableRubyOreGeneration),
 	SAPPHIRE(6, 7, YOffset.fixed(40), 110, TargetDimension.OVERWORLD, UniformIntProvider.create(2,6), TechRebornConfig.enableSapphireOreGeneration),
 	SILVER(6, 16, YOffset.aboveBottom(40), 60,TargetDimension.OVERWORLD, TechRebornConfig.enableSilverOreGeneration),
-	//SODALITE(6, 4, YOffset.aboveBottom(0), 360, TargetDimension.END, TechRebornConfig.enableSodaliteOreGeneration),
+
 	SPHALERITE(6, 4, YOffset.aboveBottom(40), 90, TargetDimension.NETHER, TechRebornConfig.enableSphaleriteOreGeneration),
 	TIN(8, 16, YOffset.fixed(25), 80, TargetDimension.OVERWORLD, TechRebornConfig.enableTinOreGeneration),
 
-	TUNGSTEN_END(6, 3, YOffset.aboveBottom(0), 360, TargetDimension.END, TechRebornConfig.enableTungstenOreGeneration),
-	// from 30 to 401
-	TUNGSTEN_NETHER(4, 10, YOffset.fixed(30), 50, TargetDimension.NETHER, TechRebornConfig.enableTungstenOreGeneration),
+	TUNGSTEN_END(6, 3, YOffset.aboveBottom(0), 360, TargetDimension.END, TechRebornConfig.enableTungstenOreGeneration && TechRebornConfig.enableOresInEnd),
+	TUNGSTEN_NETHER(4, 10, YOffset.fixed(30), 50, TargetDimension.NETHER, TechRebornConfig.enableTungstenOreGeneration && !TechRebornConfig.enableOresInEnd),
 
-	NICKEL(7, 10, YOffset.fixed(110), 200, TargetDimension.OVERWORLD, true),
-	NICKEL_NETHER(30, 15, YOffset.aboveBottom(0), 360, TargetDimension.NETHER, false),
+	NICKEL(7, 10, YOffset.fixed(110), 200, TargetDimension.OVERWORLD, TechRebornConfig.enableNickelOreGeneration),
 
-	SODALITE_END(6, 4, YOffset.aboveBottom(0), 360, TargetDimension.END, true),
-	SODALITE_OVERWORLD(5, 7, YOffset.aboveBottom(5), -15, TargetDimension.OVERWORLD, true),
+	SODALITE_END(6, 4, YOffset.aboveBottom(0), 360, TargetDimension.END, TechRebornConfig.enableSodaliteOreGeneration && TechRebornConfig.enableOresInEnd),
+	SODALITE_OVERWORLD(5, 7, YOffset.aboveBottom(5), -15, TargetDimension.OVERWORLD, TechRebornConfig.enableSodaliteOreGeneration && !TechRebornConfig.enableOresInEnd),
 
-	SHELDONITE_END(6, 4, YOffset.aboveBottom(0), 360, TargetDimension.END, TechRebornConfig.enableSheldoniteOreGeneration),
-	SHELDONITE_NETHER(4, 9, YOffset.belowTop(45), 300, TargetDimension.NETHER, TechRebornConfig.enableSheldoniteOreGeneration);
+	SHELDONITE_END(6, 4, YOffset.aboveBottom(0), 360, TargetDimension.END, TechRebornConfig.enableSheldoniteOreGeneration && TechRebornConfig.enableOresInEnd),
+	SHELDONITE_NETHER(4, 9, YOffset.belowTop(45), 300, TargetDimension.NETHER, TechRebornConfig.enableSheldoniteOreGeneration && !TechRebornConfig.enableOresInEnd);
 
 
 	public final int veinSize;
