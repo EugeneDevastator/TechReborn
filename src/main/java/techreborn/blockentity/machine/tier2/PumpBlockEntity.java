@@ -83,6 +83,8 @@ public class PumpBlockEntity extends GenericMachineBlockEntity implements BuiltS
 	private long timeToPump;
 	private int range;
 	private int depth;
+	private BlockPos lastPumpedPos;
+	private boolean hadSuccessfulRun = true;
 
 	public PumpBlockEntity(BlockPos pos, BlockState state) {
 		super(TRBlockEntities.PUMP, pos, state, "Pump", TechRebornConfig.pumpMaxInput, TechRebornConfig.pumpMaxEnergy, TRContent.Machine.PUMP.block, 0);
@@ -262,12 +264,17 @@ public class PumpBlockEntity extends GenericMachineBlockEntity implements BuiltS
 				}
 				world.setBlockState(pumpedTargetBlockPos, replacementBlock.getDefaultState());
 				pumpedTargetBlockPos = null;
+				hadSuccessfulRun = true;
 			}
 		} else if (!getTank().isFull()) {
 			//find next target
 			findNextToPump(world);
 			if (pumpedTargetBlockPos != null) {
 				timeToPump = world.getTime() + (long) (TechRebornConfig.pumpTicksToComplete * (1 - getSpeedMultiplier()));
+			} else if (hadSuccessfulRun) {
+				// do the second check in case we have finite fluids, to pump agian refilled blocsk.
+				hadSuccessfulRun = false;
+				reset();
 			} else {
 				//else - consider exhausted
 				world.setBlockState(pos, world.getBlockState(pos).with(BlockMachineBase.ACTIVE, false));
