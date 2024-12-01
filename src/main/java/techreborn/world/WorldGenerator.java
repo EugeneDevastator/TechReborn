@@ -52,8 +52,12 @@ import java.util.function.Consumer;
 
 // /fill ~ ~ ~ ~20 ~20 ~20 air replace #minecraft:base_stone_overworld
 public class WorldGenerator {
-	public static final List<TROreFeatureConfig> ORE_FEATURES = getOreFeatures();
-
+	private static class Holder {
+		static final List<TROreFeatureConfig> ORE_FEATURES_IN = collectOreFeatures();
+	}
+	public static List<TROreFeatureConfig> GetOreFeatures() {
+		return Holder.ORE_FEATURES_IN;
+	}
 	public static final Identifier OIL_LAKE_ID = Identifier.of("techreborn", "oil_lake");
 	public static final RegistryKey<ConfiguredFeature<?, ?>> OIL_LAKE_FEATURE = RegistryKey.of(RegistryKeys.CONFIGURED_FEATURE, OIL_LAKE_ID);
 	public static final RegistryKey<PlacedFeature> OIL_LAKE_PLACED_FEATURE = RegistryKey.of(RegistryKeys.PLACED_FEATURE, OIL_LAKE_ID);
@@ -94,7 +98,7 @@ public class WorldGenerator {
 				return;
 			}
 
-			for (TROreFeatureConfig feature : ORE_FEATURES) {
+			for (TROreFeatureConfig feature : GetOreFeatures()) {
 				if (feature.biomeSelector().test(biomeSelectionContext)) {
 					biomeModificationContext.getGenerationSettings().addFeature(GenerationStep.Feature.UNDERGROUND_ORES, feature.placedFeature());
 				}
@@ -102,12 +106,13 @@ public class WorldGenerator {
 		};
 	}
 
-	private static List<TROreFeatureConfig> getOreFeatures() {
-		return Arrays.stream(TRContent.Ores.values())
+	private static List<TROreFeatureConfig> collectOreFeatures() {
+		var lst = Arrays.stream(TRContent.Ores.values())
 				.filter(ores -> ores.distribution != null)
-				.filter(ores -> ores.distribution.isGenerating())
+				.filter(ores -> ores.distribution.isGenerating().get())
 				.map(TROreFeatureConfig::of)
 				.toList();
+		return lst;
 	}
 
 	private static BiConsumer<BiomeSelectionContext, BiomeModificationContext> rubberTreeModifier() {

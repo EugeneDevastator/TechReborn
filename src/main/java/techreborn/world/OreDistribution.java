@@ -67,9 +67,9 @@ public enum OreDistribution {
 	public final int maxY; // Max height of ore in numbers of blocks from the bottom of the world
 	public @NotNull final UniformIntProvider experienceDropped;
 	public final TargetDimension dimension;
-	private final boolean generating;
+	private final Supplier<Boolean> generating;
 
-	OreDistribution(int veinSize, int veinsPerChunk, YOffset minOffset, int maxY, TargetDimension dimension, UniformIntProvider experienceDropped, boolean generating) {
+	OreDistribution(int veinSize, int veinsPerChunk, YOffset minOffset, int maxY, TargetDimension dimension, UniformIntProvider experienceDropped, Supplier<Boolean> generating) {
 		this.veinSize = veinSize;
 		this.veinsPerChunk = veinsPerChunk;
 		this.minOffset = minOffset;
@@ -79,11 +79,11 @@ public enum OreDistribution {
 		this.generating = generating;
 	}
 
-	OreDistribution(int veinSize, int veinsPerChunk, YOffset minOffset, int maxY, TargetDimension dimension, boolean generating) {
+	OreDistribution(int veinSize, int veinsPerChunk, YOffset minOffset, int maxY, TargetDimension dimension, Supplier<Boolean> generating) {
 		this(veinSize, veinsPerChunk, minOffset, maxY, dimension, null, generating);
 	}
 
-	public boolean isGenerating() {
+	public Supplier<Boolean> isGenerating() {
 		return generating;
 	}
 }

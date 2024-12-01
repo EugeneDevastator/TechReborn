@@ -72,7 +72,7 @@ class TRDynamicContent {
 	static void configuredFeatures(Registerable<ConfiguredFeature> registry) {
 		def placedFeatureLookup = registry.getRegistryLookup(RegistryKeys.PLACED_FEATURE)
 
-		WorldGenerator.ORE_FEATURES.forEach {
+		WorldGenerator.GetOreFeatures().forEach {
 			registry.register(it.configuredFeature(), createOreConfiguredFeature(it))
 		}
 
@@ -84,7 +84,7 @@ class TRDynamicContent {
 	static void placedFeatures(Registerable<PlacedFeature> registry) {
 		def configuredFeatureLookup = registry.getRegistryLookup(RegistryKeys.CONFIGURED_FEATURE)
 
-		WorldGenerator.ORE_FEATURES.forEach {
+		WorldGenerator.GetOreFeatures().forEach {
 			registry.register(it.placedFeature(), createOrePlacedFeature(configuredFeatureLookup, it))
 		}
 
