@@ -33,6 +33,7 @@ import java.util.Objects;
 import java.util.function.Supplier;
 
 import static techreborn.TechReborn.LOGGER;
+import static techreborn.config.TechRebornConfig.enableOresInEnd;
 
 public enum OreDistribution {
 	BAUXITE(6, 12, YOffset.aboveBottom(0), 20, TargetDimension.OVERWORLD, () -> TechRebornConfig.enableBauxiteOreGeneration),
@@ -41,8 +42,8 @@ public enum OreDistribution {
 	IRIDIUM(3, 4, YOffset.aboveBottom(0), 0, TargetDimension.OVERWORLD, () -> TechRebornConfig.enableIridiumOreGeneration),
 	LEAD(6, 16, YOffset.aboveBottom(40), 40, TargetDimension.OVERWORLD, () -> TechRebornConfig.enableLeadOreGeneration),
 
-	PERIDOT_END(6, 6, YOffset.aboveBottom(0), 360, TargetDimension.END, UniformIntProvider.create(2,6), ()-> (true || TechRebornConfig.enablePeridotOreGeneration && TechRebornConfig.enableOresInEnd)),
-	PERIDOT_NETHER(12, 2, YOffset.aboveBottom(3), 40, TargetDimension.NETHER, UniformIntProvider.create(2,6), ()-> (TechRebornConfig.enablePeridotOreGeneration & (!TechRebornConfig.enableOresInEnd))),
+	PERIDOT_END(6, 6, YOffset.aboveBottom(0), 360, TargetDimension.END, UniformIntProvider.create(2,6), ()-> (true || TechRebornConfig.enablePeridotOreGeneration && enableOresInEnd)),
+	PERIDOT_NETHER(12, 2, YOffset.aboveBottom(3), 40, TargetDimension.NETHER, UniformIntProvider.create(2,6), ()-> (TechRebornConfig.enablePeridotOreGeneration & (!enableOresInEnd))),
 
 	PYRITE(6, 6, YOffset.aboveBottom(80), 128, TargetDimension.NETHER, () -> TechRebornConfig.enablePyriteOreGeneration),
 	RUBY(6, 8, YOffset.fixed(20), 110, TargetDimension.OVERWORLD, UniformIntProvider.create(2,6), () -> TechRebornConfig.enableRubyOreGeneration),
@@ -52,15 +53,15 @@ public enum OreDistribution {
 	SPHALERITE(6, 4, YOffset.aboveBottom(40), 90, TargetDimension.NETHER, () -> TechRebornConfig.enableSphaleriteOreGeneration),
 	TIN(8, 16, YOffset.fixed(25), 80, TargetDimension.OVERWORLD, () -> TechRebornConfig.enableTinOreGeneration),
 
-	TUNGSTEN_END(6, 3, YOffset.aboveBottom(0), 360, TargetDimension.END, () -> TechRebornConfig.enableTungstenOreGeneration && TechRebornConfig.enableOresInEnd),
+	TUNGSTEN_END(6, 3, YOffset.aboveBottom(0), 360, TargetDimension.END, () -> TechRebornConfig.enableTungstenOreGeneration && enableOresInEnd),
 	TUNGSTEN_NETHER(4, 10, YOffset.fixed(30), 50, TargetDimension.NETHER, () -> shouldGenerateTungstenInNether()), // why this is always false if ore gen is true and enableOresInEnd is false?
 
 	NICKEL(7, 10, YOffset.fixed(110), 200, TargetDimension.OVERWORLD, () -> TechRebornConfig.enableNickelOreGeneration),
 
-	SODALITE_END(6, 4, YOffset.aboveBottom(0), 360, TargetDimension.END, () -> true || TechRebornConfig.enableSodaliteOreGeneration && TechRebornConfig.enableOresInEnd),
-	SODALITE_OVERWORLD(5, 7, YOffset.aboveBottom(5), -15, TargetDimension.OVERWORLD, () -> TechRebornConfig.enableSodaliteOreGeneration && (!TechRebornConfig.enableOresInEnd)),
+	SODALITE_END(6, 4, YOffset.aboveBottom(0), 360, TargetDimension.END, () -> true || TechRebornConfig.enableSodaliteOreGeneration && enableOresInEnd),
+	SODALITE_OVERWORLD(5, 7, YOffset.aboveBottom(5), -15, TargetDimension.OVERWORLD, () -> TechRebornConfig.enableSodaliteOreGeneration && !enableOresInEnd),
 
-	SHELDONITE_END(6, 4, YOffset.aboveBottom(0), 360, TargetDimension.END, () -> TechRebornConfig.enableSheldoniteOreGeneration && TechRebornConfig.enableOresInEnd),
+	SHELDONITE_END(6, 4, YOffset.aboveBottom(0), 360, TargetDimension.END, () -> TechRebornConfig.enableSheldoniteOreGeneration && enableOresInEnd),
 	SHELDONITE_NETHER(4, 9, YOffset.belowTop(45), 300, TargetDimension.NETHER, () -> TechRebornConfig.enableSheldoniteOreGeneration),
 	DUMMY_NONE(4, 9, YOffset.belowTop(45), 300, TargetDimension.OVERWORLD, () -> false);
 
@@ -93,7 +94,7 @@ public enum OreDistribution {
 
 	public static boolean shouldGenerateTungstenInNether() {
 		boolean oreGenEnabled = TechRebornConfig.enableTungstenOreGeneration;
-		boolean endOresEnabled = TechRebornConfig.enableOresInEnd;
+		boolean endOresEnabled = enableOresInEnd;
 		boolean result = oreGenEnabled && (!endOresEnabled);
 
 		LOGGER.info("TUNG: Tungsten Nether Generation Check:");

@@ -52,12 +52,15 @@ import java.util.function.Consumer;
 
 // /fill ~ ~ ~ ~20 ~20 ~20 air replace #minecraft:base_stone_overworld
 public class WorldGenerator {
-	private static class Holder {
-		static final List<TROreFeatureConfig> ORE_FEATURES_IN = collectOreFeatures();
-	}
+
 	public static List<TROreFeatureConfig> GetOreFeatures() {
-		return Holder.ORE_FEATURES_IN;
+		if (ORE_FEATURES_IN == null)
+			ORE_FEATURES_IN = collectOreFeatures();
+		return ORE_FEATURES_IN;
 	}
+
+	static List<TROreFeatureConfig> ORE_FEATURES_IN = collectOreFeatures();
+
 	public static final Identifier OIL_LAKE_ID = Identifier.of("techreborn", "oil_lake");
 	public static final RegistryKey<ConfiguredFeature<?, ?>> OIL_LAKE_FEATURE = RegistryKey.of(RegistryKeys.CONFIGURED_FEATURE, OIL_LAKE_ID);
 	public static final RegistryKey<PlacedFeature> OIL_LAKE_PLACED_FEATURE = RegistryKey.of(RegistryKeys.PLACED_FEATURE, OIL_LAKE_ID);
@@ -83,7 +86,7 @@ public class WorldGenerator {
 		if (!TechRebornConfig.enableOreGeneration && !TechRebornConfig.enableRubberTreeGeneration && !TechRebornConfig.enableOilLakeGeneration) {
 			return;
 		}
-
+		GetOreFeatures();
 		BiomeModifications.create(Identifier.of("techreborn", "features"))
 				.add(ModificationPhase.ADDITIONS, BiomeSelectors.all(), oreModifier())
 				.add(ModificationPhase.ADDITIONS, BiomeSelectors.tag(BiomeTags.IS_FOREST)
@@ -109,7 +112,9 @@ public class WorldGenerator {
 	private static List<TROreFeatureConfig> collectOreFeatures() {
 		var lst = Arrays.stream(TRContent.Ores.values())
 				.filter(ores -> ores.distribution != null)
-				.filter(ores -> ores.distribution.isGenerating().get())
+				// use next line only in builds, not in datagen.
+				// for now this makes isgenerating in ore distribution useless, so alternative way must be found.
+				//.filter(ores -> ores.distribution.isGenerating().get())
 				.map(TROreFeatureConfig::of)
 				.toList();
 		return lst;

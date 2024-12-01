@@ -405,7 +405,7 @@ public class TRItemGroup {
 	}
 
 	private static void addNaturalBlocks(FabricItemGroupEntries entries) {
-		entries.addBefore(Items.IRON_ORE, TRContent.Ores.TIN, TRContent.Ores.NICKEL, TRContent.Ores.DEEPSLATE_TIN, TRContent.Ores.DEEPSLATE_SODALITE);
+		entries.addBefore(Items.IRON_ORE, TRContent.Ores.TIN, TRContent.Ores.NICKEL, TRContent.Ores.DEEPSLATE_TIN);
 		entries.addAfter(Items.DEEPSLATE_COPPER_ORE,
 			TRContent.Ores.LEAD, TRContent.Ores.DEEPSLATE_LEAD,
 			TRContent.Ores.SILVER, TRContent.Ores.DEEPSLATE_SILVER);
@@ -415,7 +415,7 @@ public class TRItemGroup {
 		entries.addAfter(Items.DEEPSLATE_REDSTONE_ORE,
 			TRContent.Ores.RUBY, TRContent.Ores.DEEPSLATE_RUBY,
 			TRContent.Ores.SAPPHIRE, TRContent.Ores.DEEPSLATE_SAPPHIRE);
-		entries.addAfter(Items.DEEPSLATE_DIAMOND_ORE, TRContent.Ores.IRIDIUM, TRContent.Ores.DEEPSLATE_IRIDIUM);
+		entries.addAfter(Items.DEEPSLATE_DIAMOND_ORE, TRContent.Ores.IRIDIUM, TRContent.Ores.DEEPSLATE_IRIDIUM, TRContent.Ores.DEEPSLATE_SODALITE);
 		entries.addAfter(Items.NETHER_GOLD_ORE,
 			TRContent.Ores.CINNABAR,
 			TRContent.Ores.PYRITE,
