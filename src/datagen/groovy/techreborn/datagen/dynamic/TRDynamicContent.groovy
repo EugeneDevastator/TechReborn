@@ -97,11 +97,19 @@ class TRDynamicContent {
 	private static ConfiguredFeature createOreConfiguredFeature(TROreFeatureConfig config) {
 		def oreFeatureConfig = switch (config.ore().distribution.dimension) {
 			case TargetDimension.OVERWORLD -> createOverworldOreFeatureConfig(config)
-			case TargetDimension.NETHER -> createSimpleOreFeatureConfig(
-				new TagMatchRuleTest(BlockTags.BASE_STONE_NETHER), config)
+			case TargetDimension.NETHER -> createNetherOreFeatureConfig(config)
 			case TargetDimension.END -> createSimpleOreFeatureConfig(new BlockStateMatchRuleTest(Blocks.END_STONE.getDefaultState()), config)
-		} //here
+		}
 		return new ConfiguredFeature<>(Feature.ORE, oreFeatureConfig)
+	}
+
+	private static OreFeatureConfig createNetherOreFeatureConfig(TROreFeatureConfig config) {
+		return new OreFeatureConfig(List.of(
+			// most likely this doesnt work, need more simple solution like last time
+			OreFeatureConfig.createTarget(new BlockMatchRuleTest(Blocks.NETHERRACK), config.ore().block.getDefaultState()),
+			OreFeatureConfig.createTarget(new BlockMatchRuleTest(Blocks.BASALT), config.ore().block.getDefaultState()),
+			OreFeatureConfig.createTarget(new TagMatchRuleTest(BlockTags.BASE_STONE_NETHER), config.ore().block.getDefaultState()),
+		), config.ore().distribution.veinSize);
 	}
 
 	private static OreFeatureConfig createOverworldOreFeatureConfig(TROreFeatureConfig config) {
