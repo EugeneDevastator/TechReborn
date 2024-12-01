@@ -30,35 +30,39 @@ import org.jetbrains.annotations.NotNull;
 import techreborn.config.TechRebornConfig;
 
 import java.util.Objects;
+import java.util.function.Supplier;
+
+import static techreborn.TechReborn.LOGGER;
 
 public enum OreDistribution {
-	BAUXITE(6, 12, YOffset.aboveBottom(0), 20, TargetDimension.OVERWORLD, TechRebornConfig.enableBauxiteOreGeneration),
-	CINNABAR(6, 5, YOffset.aboveBottom(0), 100, TargetDimension.NETHER, TechRebornConfig.enableCinnabarOreGeneration),
-	GALENA(8, 12, YOffset.aboveBottom(25), 40, TargetDimension.OVERWORLD, TechRebornConfig.enableGalenaOreGeneration),
-	IRIDIUM(3, 4, YOffset.aboveBottom(0), 0, TargetDimension.OVERWORLD, TechRebornConfig.enableIridiumOreGeneration),
-	LEAD(6, 16, YOffset.aboveBottom(40), 40, TargetDimension.OVERWORLD, TechRebornConfig.enableLeadOreGeneration),
+	BAUXITE(6, 12, YOffset.aboveBottom(0), 20, TargetDimension.OVERWORLD, () -> TechRebornConfig.enableBauxiteOreGeneration),
+	CINNABAR(6, 5, YOffset.aboveBottom(0), 100, TargetDimension.NETHER, () -> TechRebornConfig.enableCinnabarOreGeneration),
+	GALENA(8, 12, YOffset.aboveBottom(25), 40, TargetDimension.OVERWORLD, () -> TechRebornConfig.enableGalenaOreGeneration),
+	IRIDIUM(3, 4, YOffset.aboveBottom(0), 0, TargetDimension.OVERWORLD, () -> TechRebornConfig.enableIridiumOreGeneration),
+	LEAD(6, 16, YOffset.aboveBottom(40), 40, TargetDimension.OVERWORLD, () -> TechRebornConfig.enableLeadOreGeneration),
 
-	PERIDOT_END(6, 6, YOffset.aboveBottom(0), 360, TargetDimension.END, UniformIntProvider.create(2,6), TechRebornConfig.enablePeridotOreGeneration && TechRebornConfig.enableOresInEnd),
-	PERIDOT_NETHER(12, 2, YOffset.aboveBottom(3), 40, TargetDimension.NETHER, UniformIntProvider.create(2,6), TechRebornConfig.enablePeridotOreGeneration && !TechRebornConfig.enableOresInEnd),
+	PERIDOT_END(6, 6, YOffset.aboveBottom(0), 360, TargetDimension.END, UniformIntProvider.create(2,6), ()-> (true || TechRebornConfig.enablePeridotOreGeneration && TechRebornConfig.enableOresInEnd)),
+	PERIDOT_NETHER(12, 2, YOffset.aboveBottom(3), 40, TargetDimension.NETHER, UniformIntProvider.create(2,6), ()-> (TechRebornConfig.enablePeridotOreGeneration & (!TechRebornConfig.enableOresInEnd))),
 
-	PYRITE(6, 6, YOffset.aboveBottom(80), 128, TargetDimension.NETHER, TechRebornConfig.enablePyriteOreGeneration),
-	RUBY(6, 8, YOffset.fixed(20), 110, TargetDimension.OVERWORLD, UniformIntProvider.create(2,6), TechRebornConfig.enableRubyOreGeneration),
-	SAPPHIRE(6, 7, YOffset.fixed(40), 110, TargetDimension.OVERWORLD, UniformIntProvider.create(2,6), TechRebornConfig.enableSapphireOreGeneration),
-	SILVER(6, 16, YOffset.aboveBottom(40), 60,TargetDimension.OVERWORLD, TechRebornConfig.enableSilverOreGeneration),
+	PYRITE(6, 6, YOffset.aboveBottom(80), 128, TargetDimension.NETHER, () -> TechRebornConfig.enablePyriteOreGeneration),
+	RUBY(6, 8, YOffset.fixed(20), 110, TargetDimension.OVERWORLD, UniformIntProvider.create(2,6), () -> TechRebornConfig.enableRubyOreGeneration),
+	SAPPHIRE(6, 7, YOffset.fixed(40), 110, TargetDimension.OVERWORLD, UniformIntProvider.create(2,6), () -> TechRebornConfig.enableSapphireOreGeneration),
+	SILVER(6, 16, YOffset.aboveBottom(40), 60,TargetDimension.OVERWORLD, () -> TechRebornConfig.enableSilverOreGeneration),
 
-	SPHALERITE(6, 4, YOffset.aboveBottom(40), 90, TargetDimension.NETHER, TechRebornConfig.enableSphaleriteOreGeneration),
-	TIN(8, 16, YOffset.fixed(25), 80, TargetDimension.OVERWORLD, TechRebornConfig.enableTinOreGeneration),
+	SPHALERITE(6, 4, YOffset.aboveBottom(40), 90, TargetDimension.NETHER, () -> TechRebornConfig.enableSphaleriteOreGeneration),
+	TIN(8, 16, YOffset.fixed(25), 80, TargetDimension.OVERWORLD, () -> TechRebornConfig.enableTinOreGeneration),
 
-	TUNGSTEN_END(6, 3, YOffset.aboveBottom(0), 360, TargetDimension.END, TechRebornConfig.enableTungstenOreGeneration && TechRebornConfig.enableOresInEnd),
-	TUNGSTEN_NETHER(4, 10, YOffset.fixed(30), 50, TargetDimension.NETHER, TechRebornConfig.enableTungstenOreGeneration && !TechRebornConfig.enableOresInEnd),
+	TUNGSTEN_END(6, 3, YOffset.aboveBottom(0), 360, TargetDimension.END, () -> TechRebornConfig.enableTungstenOreGeneration && TechRebornConfig.enableOresInEnd),
+	TUNGSTEN_NETHER(4, 10, YOffset.fixed(30), 50, TargetDimension.NETHER, () -> shouldGenerateTungstenInNether()), // why this is always false if ore gen is true and enableOresInEnd is false?
 
-	NICKEL(7, 10, YOffset.fixed(110), 200, TargetDimension.OVERWORLD, TechRebornConfig.enableNickelOreGeneration),
+	NICKEL(7, 10, YOffset.fixed(110), 200, TargetDimension.OVERWORLD, () -> TechRebornConfig.enableNickelOreGeneration),
 
-	SODALITE_END(6, 4, YOffset.aboveBottom(0), 360, TargetDimension.END, TechRebornConfig.enableSodaliteOreGeneration && TechRebornConfig.enableOresInEnd),
-	SODALITE_OVERWORLD(5, 7, YOffset.aboveBottom(5), -15, TargetDimension.OVERWORLD, TechRebornConfig.enableSodaliteOreGeneration && !TechRebornConfig.enableOresInEnd),
+	SODALITE_END(6, 4, YOffset.aboveBottom(0), 360, TargetDimension.END, () -> true || TechRebornConfig.enableSodaliteOreGeneration && TechRebornConfig.enableOresInEnd),
+	SODALITE_OVERWORLD(5, 7, YOffset.aboveBottom(5), -15, TargetDimension.OVERWORLD, () -> TechRebornConfig.enableSodaliteOreGeneration && (!TechRebornConfig.enableOresInEnd)),
 
-	SHELDONITE_END(6, 4, YOffset.aboveBottom(0), 360, TargetDimension.END, TechRebornConfig.enableSheldoniteOreGeneration && TechRebornConfig.enableOresInEnd),
-	SHELDONITE_NETHER(4, 9, YOffset.belowTop(45), 300, TargetDimension.NETHER, TechRebornConfig.enableSheldoniteOreGeneration && !TechRebornConfig.enableOresInEnd);
+	SHELDONITE_END(6, 4, YOffset.aboveBottom(0), 360, TargetDimension.END, () -> TechRebornConfig.enableSheldoniteOreGeneration && TechRebornConfig.enableOresInEnd),
+	SHELDONITE_NETHER(4, 9, YOffset.belowTop(45), 300, TargetDimension.NETHER, () -> TechRebornConfig.enableSheldoniteOreGeneration),
+	DUMMY_NONE(4, 9, YOffset.belowTop(45), 300, TargetDimension.OVERWORLD, () -> false);
 
 
 	public final int veinSize;
@@ -85,5 +89,18 @@ public enum OreDistribution {
 
 	public Supplier<Boolean> isGenerating() {
 		return generating;
+	}
+
+	public static boolean shouldGenerateTungstenInNether() {
+		boolean oreGenEnabled = TechRebornConfig.enableTungstenOreGeneration;
+		boolean endOresEnabled = TechRebornConfig.enableOresInEnd;
+		boolean result = oreGenEnabled && (!endOresEnabled);
+
+		LOGGER.info("TUNG: Tungsten Nether Generation Check:");
+		LOGGER.info("TUNG: - Ore Generation Enabled: " + oreGenEnabled);
+		LOGGER.info("TUNG: - End Ores Enabled: " + endOresEnabled);
+		LOGGER.info("TUNG: - Final Result: " + result);
+
+		return result;
 	}
 }

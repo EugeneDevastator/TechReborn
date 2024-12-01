@@ -1,7 +1,6 @@
 {
     "replace": false,
     "values": [
-        "techreborn:nickel_ore",
-        "techreborn:nickel_ore_nether"
+        "techreborn:nickel_ore"
     ]
 }

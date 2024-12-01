@@ -118,7 +118,6 @@ class BlockLootTableProvider extends FabricBlockLootTableProvider {
 		addOreDrop(TRContent.Ores.RUBY, this::rubyOreDrops)
 		addOreDrop(TRContent.Ores.SAPPHIRE, this::sapphireOreDrops)
 		addOreDrop(TRContent.Ores.SODALITE, this::sodaliteOreDrops)
-		addOreDrop(TRContent.Ores.SODALITE_STONE, this::sodaliteOreDrops)
 		addOreDrop(TRContent.Ores.SPHALERITE, this::sphaleriteOreDrops)
 		addOreDrop(TRContent.Ores.PYRITE, block -> oreDrops(block, TRContent.Dusts.PYRITE.asItem()))
 		addOreDrop(TRContent.Ores.PERIDOT, block -> drops(block, TRContent.Gems.PERIDOT.asItem(), UniformLootNumberProvider.create(1.0F, 2.0F)))

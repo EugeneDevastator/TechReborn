@@ -108,6 +108,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static techreborn.TechReborn.LOGGER;
+
 public class TRContent {
 	public static final Marker DATAGEN = MarkerFactory.getMarker("datagen");
 	public static final BlockSetType RUBBER_WOOD_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.OAK).build(Identifier.of(TechReborn.MOD_ID, "rubber_wood"));
@@ -470,25 +472,28 @@ public class TRContent {
 		LEAD(OreDistribution.LEAD),
 		NICKEL(OreDistribution.NICKEL),
 
-		PERIDOT(OreDistribution.PERIDOT_END),
+		PERIDOT(OreDistribution.DUMMY_NONE),
+		//PERIDOT_END(OreDistribution.PERIDOT_END),
 		PERIDOT_NETHER(OreDistribution.PERIDOT_NETHER),
 
 		PYRITE(OreDistribution.PYRITE),
 		RUBY(OreDistribution.RUBY),
 		SAPPHIRE(OreDistribution.SAPPHIRE),
 
-		SHELDONITE(OreDistribution.SHELDONITE_END),
+		SHELDONITE(OreDistribution.DUMMY_NONE),
+		//SHELDONITE_END(OreDistribution.DUMMY_NONE),
 		SHELDONITE_NETHER(OreDistribution.SHELDONITE_NETHER),
 
 		SILVER(OreDistribution.SILVER),
 
-		SODALITE(OreDistribution.SODALITE_END),
-		SODALITE_STONE(OreDistribution.SODALITE_OVERWORLD),
+		SODALITE(OreDistribution.SODALITE_OVERWORLD),
+		//SODALITE_END(OreDistribution.SODALITE_END),
+		//SODALITE_STONE(OreDistribution.SODALITE_OVERWORLD),
 
 		SPHALERITE(OreDistribution.SPHALERITE),
 		TIN(OreDistribution.TIN),
 
-		TUNGSTEN(OreDistribution.TUNGSTEN_END, true),
+		TUNGSTEN(OreDistribution.DUMMY_NONE, true),
 		TUNGSTEN_NETHER(OreDistribution.TUNGSTEN_NETHER, true),
 
 		DEEPSLATE_BAUXITE(BAUXITE),
@@ -499,9 +504,10 @@ public class TRContent {
 		DEEPSLATE_SAPPHIRE(SAPPHIRE),
 		DEEPSLATE_SHELDONITE(SHELDONITE),
 		DEEPSLATE_SILVER(SILVER),
-		DEEPSLATE_SODALITE(SODALITE_STONE),
+		DEEPSLATE_SODALITE(SODALITE),
 		DEEPSLATE_TIN(TIN),
-		DEEPSLATE_TUNGSTEN(TUNGSTEN);
+		DEEPSLATE_TUNGSTEN(TUNGSTEN),
+		DEEPSLATE_PERIDOT(PERIDOT);
 
 		public final String name;
 		public final Block block;
@@ -517,7 +523,6 @@ public class TRContent {
 			tag = TagKey.of(RegistryKeys.ITEM, Identifier.of("c", "ores/" +
 				(name.startsWith("deepslate_") ? name.substring(name.indexOf('_')+1) : name)
 					.replaceAll("_(end|nether|stone)$", "")));
-
 			this.distribution = distribution;
 		}
 
@@ -531,6 +536,7 @@ public class TRContent {
 
 		Ores(TRContent.Ores stoneOre) {
 			this(null, stoneOre.distribution != null ? stoneOre.distribution.experienceDropped : null, stoneOre.industrial);
+			LOGGER.info("ORE MAPS:" + stoneOre.name +" mapped to > " + this.name);
 			deepslateMap.put(stoneOre, this);
 			unDeepslateMap.put(this, stoneOre);
 		}
@@ -856,7 +862,7 @@ public class TRContent {
 			}
 			catch (IllegalArgumentException ex) {
 				if (InitUtils.isDatagenRunning())
-					TechReborn.LOGGER.warn(DATAGEN, "Raw metal {} has no ore block equivalent!", name);
+					LOGGER.warn(DATAGEN, "Raw metal {} has no ore block equivalent!", name);
 			}
 			ore = oreVariant;
 			StorageBlocks blockVariant = null;
@@ -865,7 +871,7 @@ public class TRContent {
 			}
 			catch (IllegalArgumentException ex) {
 				if (InitUtils.isDatagenRunning())
-					TechReborn.LOGGER.warn(DATAGEN, "Raw metal {} has no storage block equivalent!", name);
+					LOGGER.warn(DATAGEN, "Raw metal {} has no storage block equivalent!", name);
 			}
 			storageBlock = blockVariant;
 			InitUtils.setup(item, "raw_" + name);
@@ -937,7 +943,7 @@ public class TRContent {
 				}
 				catch (IllegalArgumentException ex) {
 					if (InitUtils.isDatagenRunning())
-						TechReborn.LOGGER.warn(DATAGEN, "Small dust {} has no dust equivalent!", name);
+						LOGGER.warn(DATAGEN, "Small dust {} has no dust equivalent!", name);
 				}
 			dust = dustVariant;
 			InitUtils.setup(item, name + "_small_dust");
@@ -1013,7 +1019,7 @@ public class TRContent {
 			}
 			catch (IllegalArgumentException ex) {
 				if (InitUtils.isDatagenRunning())
-					TechReborn.LOGGER.warn(DATAGEN, "Gem {} has no dust item equivalent!", name);
+					LOGGER.warn(DATAGEN, "Gem {} has no dust item equivalent!", name);
 			}
 			dust = dustVariant;
 			Ores oreVariant = null;
@@ -1022,7 +1028,7 @@ public class TRContent {
 			}
 			catch (IllegalArgumentException ex) {
 				if (InitUtils.isDatagenRunning())
-					TechReborn.LOGGER.info(DATAGEN, "Gem {} has no ore block equivalent.", name);
+					LOGGER.info(DATAGEN, "Gem {} has no ore block equivalent.", name);
 			}
 			ore = oreVariant;
 			StorageBlocks blockVariant = null;
@@ -1030,7 +1036,7 @@ public class TRContent {
 				blockVariant = StorageBlocks.valueOf(this.toString());
 			}
 			catch (IllegalArgumentException ex) {
-				TechReborn.LOGGER.warn(DATAGEN, "Gem {} has no storage block equivalent!", name);
+				LOGGER.warn(DATAGEN, "Gem {} has no storage block equivalent!", name);
 			}
 			storageBlock = blockVariant;
 			InitUtils.setup(item, name + "_gem");
@@ -1114,11 +1120,11 @@ public class TRContent {
 				try {
 					RawMetals.valueOf(this.toString());
 					if (InitUtils.isDatagenRunning())
-						TechReborn.LOGGER.info(DATAGEN, "Ingot {} has no dust item equivalent, but a raw metal.", name);
+						LOGGER.info(DATAGEN, "Ingot {} has no dust item equivalent, but a raw metal.", name);
 				}
 				catch (IllegalArgumentException ex2) {
 					if (InitUtils.isDatagenRunning())
-						TechReborn.LOGGER.warn(DATAGEN, "Ingot {} has no dust item equivalent AND no raw metal!", name);
+						LOGGER.warn(DATAGEN, "Ingot {} has no dust item equivalent AND no raw metal!", name);
 				}
 			}
 			dust = dustVariant;
@@ -1128,7 +1134,7 @@ public class TRContent {
 			}
 			catch (IllegalArgumentException ex) {
 				if (InitUtils.isDatagenRunning())
-					TechReborn.LOGGER.warn(DATAGEN, "Ingot {} has no storage block equivalent!", name);
+					LOGGER.warn(DATAGEN, "Ingot {} has no storage block equivalent!", name);
 			}
 			storageBlock = blockVariant;
 			InitUtils.setup(item, name + "_ingot");
@@ -1211,7 +1217,7 @@ public class TRContent {
 				}
 				catch (IllegalArgumentException ex) {
 					if (InitUtils.isDatagenRunning())
-						TechReborn.LOGGER.warn(DATAGEN, "Nugget {} has no ingot equivalent!", name);
+						LOGGER.warn(DATAGEN, "Nugget {} has no ingot equivalent!", name);
 				}
 			ingot = ingotVariant;
 			this.ofGem = ofGem;
@@ -1414,7 +1420,7 @@ public class TRContent {
 					}
 					catch (IllegalArgumentException ex2) {
 						if (InitUtils.isDatagenRunning())
-							TechReborn.LOGGER.warn(DATAGEN, "Plate {} has no identifiable source!", name);
+							LOGGER.warn(DATAGEN, "Plate {} has no identifiable source!", name);
 					}
 				}
 			}
@@ -1428,7 +1434,7 @@ public class TRContent {
 					this.sourceBlock = ingot.getStorageBlock();
 				else {
 					if (InitUtils.isDatagenRunning())
-						TechReborn.LOGGER.info(DATAGEN, "Plate {} has no identifiable source block.", name);
+						LOGGER.info(DATAGEN, "Plate {} has no identifiable source block.", name);
 					this.sourceBlock = null;
 				}
 			}

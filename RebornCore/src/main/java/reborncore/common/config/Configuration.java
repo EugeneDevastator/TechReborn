@@ -39,6 +39,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
+import static reborncore.RebornCore.LOGGER;
+
 public class Configuration {
 
 	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
@@ -54,6 +56,7 @@ public class Configuration {
 
 	private void setup() {
 		final File configDir = new File(FabricLoader.getInstance().getConfigDir().toFile(), modId);
+		LOGGER.info("CFG: loading file from: " + configDir.getAbsolutePath());
 
 		if (!configDir.exists()) {
 			configDir.mkdirs();
@@ -175,8 +178,9 @@ public class Configuration {
 			JsonElement jsonValue = fieldObject.get("value");
 			Class<?> fieldType = field.getType();
 
-			Object fieldValue = GSON.fromJson(jsonValue, fieldType);
 
+			Object fieldValue = GSON.fromJson(jsonValue, fieldType);
+			LOGGER.info("CONFIG READ:" + fieldType.getName() +" : " + jsonValue.toString() + "decoded : " + fieldValue.toString());
 			try {
 				field.set(null, fieldValue);
 			} catch (IllegalAccessException e) {
