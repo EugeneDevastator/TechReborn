@@ -29,7 +29,6 @@ import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.gen.YOffset;
-import org.jetbrains.annotations.NotNull;
 import techreborn.config.TechRebornConfig;
 
 import java.util.List;
@@ -75,7 +74,7 @@ public enum OreDistribution {
 	public final int veinsPerChunk;
 	public final YOffset minOffset;
 	public final int maxY; // Max height of ore in numbers of blocks from the bottom of the world
-	public @NotNull final UniformIntProvider experienceDropped;
+	public final UniformIntProvider experienceDropped;
 	public final TargetDimension dimension;
 	private final Supplier<Boolean> generating;
 	private Predicate<BiomeSelectionContext> biomeSelector = null;
