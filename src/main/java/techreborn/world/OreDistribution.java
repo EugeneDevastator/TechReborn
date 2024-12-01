@@ -24,16 +24,21 @@
 
 package techreborn.world;
 
+import net.fabricmc.fabric.api.biome.v1.BiomeSelectionContext;
+import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
+import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.gen.YOffset;
 import org.jetbrains.annotations.NotNull;
 import techreborn.config.TechRebornConfig;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.function.Supplier;
 
 import static techreborn.TechReborn.LOGGER;
 import static techreborn.config.TechRebornConfig.enableOresInEnd;
+import java.util.function.Predicate;
 
 public enum OreDistribution {
 	BAUXITE(6, 12, YOffset.aboveBottom(0), 20, TargetDimension.OVERWORLD, () -> TechRebornConfig.enableBauxiteOreGeneration),
@@ -54,7 +59,7 @@ public enum OreDistribution {
 	TIN(8, 16, YOffset.fixed(25), 80, TargetDimension.OVERWORLD, () -> TechRebornConfig.enableTinOreGeneration),
 
 	TUNGSTEN_END(6, 3, YOffset.aboveBottom(0), 360, TargetDimension.END, () -> TechRebornConfig.enableTungstenOreGeneration && enableOresInEnd),
-	TUNGSTEN_NETHER(4, 10, YOffset.fixed(30), 50, TargetDimension.NETHER, () -> shouldGenerateTungstenInNether()), // why this is always false if ore gen is true and enableOresInEnd is false?
+	TUNGSTEN_NETHER(4, 10, YOffset.aboveBottom(7), 50, TargetDimension.NETHER, () -> shouldGenerateTungstenInNether()), // why this is always false if ore gen is true and enableOresInEnd is false?
 
 	NICKEL(7, 10, YOffset.fixed(110), 200, TargetDimension.OVERWORLD, () -> TechRebornConfig.enableNickelOreGeneration),
 
@@ -73,6 +78,7 @@ public enum OreDistribution {
 	public @NotNull final UniformIntProvider experienceDropped;
 	public final TargetDimension dimension;
 	private final Supplier<Boolean> generating;
+	private Predicate<BiomeSelectionContext> biomeSelector = null;
 
 	OreDistribution(int veinSize, int veinsPerChunk, YOffset minOffset, int maxY, TargetDimension dimension, UniformIntProvider experienceDropped, Supplier<Boolean> generating) {
 		this.veinSize = veinSize;
@@ -91,6 +97,12 @@ public enum OreDistribution {
 	public Supplier<Boolean> isGenerating() {
 		return generating;
 	}
+	public Predicate<BiomeSelectionContext> GetBiomeSelector() {
+		if(biomeSelector == null)
+			return this.dimension.biomeSelector;
+		else
+			return biomeSelector;
+	}
 
 	public static boolean shouldGenerateTungstenInNether() {
 		boolean oreGenEnabled = TechRebornConfig.enableTungstenOreGeneration;
@@ -103,5 +115,11 @@ public enum OreDistribution {
 		LOGGER.info("TUNG: - Final Result: " + result);
 
 		return result;
+	}
+
+	static {
+		TUNGSTEN_NETHER.biomeSelector =  BiomeSelectors.includeByKey(BiomeKeys.BASALT_DELTAS);
+		// probably wont work in nether because of block replacements.
+		LEAD.biomeSelector =  LEAD.dimension.biomeSelector.or(BiomeSelectors.includeByKey(BiomeKeys.BASALT_DELTAS));
 	}
 }

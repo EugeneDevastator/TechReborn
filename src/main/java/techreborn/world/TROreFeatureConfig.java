@@ -46,6 +46,6 @@ public record TROreFeatureConfig(Identifier id, TRContent.Ores ore, RegistryKey<
 	}
 
 	public Predicate<BiomeSelectionContext> biomeSelector() {
-		return ore.distribution.dimension.biomeSelector;
+		return ore.distribution.GetBiomeSelector();
 	}
 }
