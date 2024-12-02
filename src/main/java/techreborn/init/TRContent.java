@@ -472,8 +472,8 @@ public class TRContent {
 		LEAD(OreDistribution.LEAD),
 		NICKEL(OreDistribution.NICKEL),
 
-		PERIDOT(OreDistribution.DUMMY_NONE),
-		//PERIDOT_END(OreDistribution.PERIDOT_END),
+		PERIDOT(OreDistribution.DUMMY_NONE), // needed for generation
+		PERIDOT_END(OreDistribution.PERIDOT_END),
 		PERIDOT_NETHER(OreDistribution.PERIDOT_NETHER),
 
 		PYRITE(OreDistribution.PYRITE),
@@ -481,19 +481,19 @@ public class TRContent {
 		SAPPHIRE(OreDistribution.SAPPHIRE),
 
 		SHELDONITE(OreDistribution.DUMMY_NONE),
-		//SHELDONITE_END(OreDistribution.DUMMY_NONE),
+		SHELDONITE_END(OreDistribution.SHELDONITE_END),
 		SHELDONITE_NETHER(OreDistribution.SHELDONITE_NETHER),
 
 		SILVER(OreDistribution.SILVER),
 
 		SODALITE(OreDistribution.SODALITE_OVERWORLD),
-		//SODALITE_END(OreDistribution.SODALITE_END),
-		//SODALITE_STONE(OreDistribution.SODALITE_OVERWORLD),
+		SODALITE_END(OreDistribution.SODALITE_END),
 
 		SPHALERITE(OreDistribution.SPHALERITE),
 		TIN(OreDistribution.TIN),
 
 		TUNGSTEN(OreDistribution.DUMMY_NONE, true),
+		TUNGSTEN_END(OreDistribution.TUNGSTEN_END, true),
 		TUNGSTEN_NETHER(OreDistribution.TUNGSTEN_NETHER, true),
 
 		DEEPSLATE_BAUXITE(BAUXITE),

@@ -133,7 +133,7 @@ class TRDynamicContent {
 
 	private static List<PlacementModifier> getOrePlacementModifiers(TROreFeatureConfig config) {
 		return oreModifiers(
-			CountPlacementModifier.of(config.ore().distribution.veinsPerChunk),
+			CountPlacementModifier.of(config.ore().distribution.getVeinsPerChunk()),
 			HeightRangePlacementModifier.uniform(
 				config.ore().distribution.minOffset,
 				YOffset.fixed(config.ore().distribution.maxY)

@@ -29,13 +29,10 @@ import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.gen.YOffset;
-import techreborn.config.TechRebornConfig;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-import static techreborn.TechReborn.LOGGER;
 import static techreborn.config.TechRebornConfig.*;
 import static techreborn.world.TargetDimension.*;
 
@@ -48,12 +45,12 @@ public enum OreDistribution {
 	IRIDIUM(3, 4, YOffset.aboveBottom(0), 0, OVERWORLD, () -> enableIridiumOreGeneration),
 	LEAD(6, 16, YOffset.aboveBottom(40), 40, OVERWORLD, () -> enableLeadOreGeneration),
 
-	PERIDOT_END(6, 6, YOffset.aboveBottom(0), 360, END, UniformIntProvider.create(2,6), ()-> enablePeridotOreGeneration && enableOresInEnd),
-	PERIDOT_NETHER(12, 2, YOffset.aboveBottom(3), 40, NETHER, UniformIntProvider.create(2,6), ()-> enablePeridotOreGeneration && !enableOresInEnd),
+	PERIDOT_END(6, 6, YOffset.aboveBottom(0), 360, END, UniformIntProvider.create(2, 6), () -> enablePeridotOreGeneration && enableOresInEnd),
+	PERIDOT_NETHER(12, 2, YOffset.aboveBottom(3), 40, NETHER, UniformIntProvider.create(2, 6), () -> enablePeridotOreGeneration && !enableOresInEnd),
 
 	PYRITE(6, 6, YOffset.aboveBottom(80), 128, NETHER, () -> enablePyriteOreGeneration),
-	RUBY(6, 8, YOffset.fixed(20), 110, OVERWORLD, UniformIntProvider.create(2,6), () -> enableRubyOreGeneration),
-	SAPPHIRE(6, 7, YOffset.fixed(40), 110, OVERWORLD, UniformIntProvider.create(2,6), () -> enableSapphireOreGeneration),
+	RUBY(6, 8, YOffset.fixed(20), 110, OVERWORLD, UniformIntProvider.create(2, 6), () -> enableRubyOreGeneration),
+	SAPPHIRE(6, 7, YOffset.fixed(40), 110, OVERWORLD, UniformIntProvider.create(2, 6), () -> enableSapphireOreGeneration),
 	SILVER(6, 16, YOffset.aboveBottom(40), 60, OVERWORLD, () -> enableSilverOreGeneration),
 
 	SPHALERITE(6, 4, YOffset.aboveBottom(40), 90, NETHER, () -> enableSphaleriteOreGeneration),
@@ -78,7 +75,7 @@ public enum OreDistribution {
 	}
 
 	public final int veinSize;
-	public final int veinsPerChunk;
+	private final int veinsPerChunk;
 	public final YOffset minOffset;
 	public final int maxY; // Max height of ore in numbers of blocks from the bottom of the world
 	public final UniformIntProvider experienceDropped;
@@ -91,7 +88,7 @@ public enum OreDistribution {
 		this.veinsPerChunk = veinsPerChunk;
 		this.minOffset = minOffset;
 		this.maxY = maxY;
-		this.experienceDropped = Objects.requireNonNullElse(experienceDropped, UniformIntProvider.create(0,0));
+		this.experienceDropped = Objects.requireNonNullElse(experienceDropped, UniformIntProvider.create(0, 0));
 		this.dimension = dimension;
 		this.generating = generating;
 	}
@@ -103,8 +100,13 @@ public enum OreDistribution {
 	public Supplier<Boolean> isGenerating() {
 		return generating;
 	}
+
+	public int getVeinsPerChunk() {
+		return isGenerating().get() ? veinsPerChunk : 0;
+	}
+
 	public Predicate<BiomeSelectionContext> GetBiomeSelector() {
-		if(biomeSelector == null)
+		if (biomeSelector == null)
 			return this.dimension.biomeSelector;
 		else
 			return biomeSelector;
