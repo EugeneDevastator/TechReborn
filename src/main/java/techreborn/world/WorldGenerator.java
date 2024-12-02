@@ -113,14 +113,10 @@ public class WorldGenerator {
 	}
 
 	private static List<TROreFeatureConfig> collectOreFeatures() {
-		var lst = Arrays.stream(TRContent.Ores.values())
+		return Arrays.stream(TRContent.Ores.values())
 				.filter(ores -> ores.distribution != null)
-				// use next line only in builds, not in datagen.
-				// for now this makes isgenerating in ore distribution useless, so alternative way must be found.
-				//.filter(ores -> ores.distribution.isGenerating().get())
 				.map(TROreFeatureConfig::of)
 				.toList();
-		return lst;
 	}
 
 	private static BiConsumer<BiomeSelectionContext, BiomeModificationContext> rubberTreeModifier() {

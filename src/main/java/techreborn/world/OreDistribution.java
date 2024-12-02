@@ -102,11 +102,6 @@ public enum OreDistribution {
 	}
 
 	public Predicate<BiomeSelectionContext> GetBiomeSelector() {
-		//if (!isGenerating().get()) // a dumb structure to make unplaceable biome for runtime gen.
-		//	return BiomeSelectors
-		//		.includeByKey(BiomeKeys.BASALT_DELTAS)
-		//		.and(BiomeSelectors.includeByKey(BiomeKeys.BAMBOO_JUNGLE));
-
 		if (biomeSelector == null)
 			return this.dimension.biomeSelector;
 		else

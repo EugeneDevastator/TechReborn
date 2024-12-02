@@ -83,7 +83,6 @@ public class PumpBlockEntity extends GenericMachineBlockEntity implements BuiltS
 	private long timeToPump;
 	private int range;
 	private int depth;
-	private BlockPos lastPumpedPos;
 	private boolean hadSuccessfulRun = true;
 
 	public PumpBlockEntity(BlockPos pos, BlockState state) {
