@@ -124,6 +124,7 @@ public class TRItemGroup {
 		entries.addAfter(TRContent.RawMetals.LEAD, TRContent.StorageBlocks.RAW_LEAD);
 		entries.addAfter(TRContent.RawMetals.SILVER, TRContent.StorageBlocks.RAW_SILVER);
 		entries.addAfter(TRContent.RawMetals.IRIDIUM, TRContent.StorageBlocks.RAW_IRIDIUM);
+			entries.addAfter(TRContent.RawMetals.TUNGSTEN, TRContent.StorageBlocks.RAW_TUNGSTEN);
 		for (TRContent.StorageBlocks block : TRContent.StorageBlocks.values()) {
 			entries.addAfter(block,
 				block.getStairsBlock(),

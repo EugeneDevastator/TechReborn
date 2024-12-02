@@ -536,7 +536,6 @@ public class TRContent {
 
 		Ores(TRContent.Ores stoneOre) {
 			this(null, stoneOre.distribution != null ? stoneOre.distribution.experienceDropped : null, stoneOre.industrial);
-			LOGGER.info("ORE MAPS:" + stoneOre.name +" mapped to > " + this.name);
 			deepslateMap.put(stoneOre, this);
 			unDeepslateMap.put(this, stoneOre);
 		}
