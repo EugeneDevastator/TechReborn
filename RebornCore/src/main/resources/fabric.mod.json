@@ -34,6 +34,9 @@
 		"fabric-biome-api-v1": ">=3.0.0",
 		"minecraft": ">=1.21.0- <1.21.2-"
 	},
+	"breaks": {
+		"quilt_loader": "*"
+	},
 	"authors": [
 		"Team Reborn",
 		"modmuss50",
