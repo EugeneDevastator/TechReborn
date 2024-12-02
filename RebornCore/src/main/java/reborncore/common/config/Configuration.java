@@ -39,8 +39,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
-import static reborncore.RebornCore.LOGGER;
-
 public class Configuration {
 
 	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();

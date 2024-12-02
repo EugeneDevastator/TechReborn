@@ -45,8 +45,8 @@ public enum OreDistribution {
 	IRIDIUM(3, 4, YOffset.aboveBottom(0), 0, OVERWORLD, () -> enableIridiumOreGeneration),
 	LEAD(6, 16, YOffset.aboveBottom(40), 40, OVERWORLD, () -> enableLeadOreGeneration),
 
-	PERIDOT_END(6, 6, YOffset.aboveBottom(0), 360, END, UniformIntProvider.create(2, 6), () -> enablePeridotOreGeneration && enableOresInEnd),
-	PERIDOT_NETHER(12, 2, YOffset.aboveBottom(3), 40, NETHER, UniformIntProvider.create(2, 6), () -> enablePeridotOreGeneration && !enableOresInEnd),
+	PERIDOT_END(6, 6, YOffset.aboveBottom(0), 360, END, UniformIntProvider.create(2, 6), () -> (enablePeridotOreGeneration && enableOresInEnd)),
+	PERIDOT_NETHER(7, 4, YOffset.aboveBottom(3), 40, NETHER, UniformIntProvider.create(2, 6), () -> (enablePeridotOreGeneration && !enableOresInEnd)),
 
 	PYRITE(6, 6, YOffset.aboveBottom(80), 128, NETHER, () -> enablePyriteOreGeneration),
 	RUBY(6, 8, YOffset.fixed(20), 110, OVERWORLD, UniformIntProvider.create(2, 6), () -> enableRubyOreGeneration),
@@ -56,16 +56,16 @@ public enum OreDistribution {
 	SPHALERITE(6, 4, YOffset.aboveBottom(40), 90, NETHER, () -> enableSphaleriteOreGeneration),
 	TIN(8, 16, YOffset.fixed(25), 80, OVERWORLD, () -> enableTinOreGeneration),
 
-	TUNGSTEN_END(6, 3, YOffset.aboveBottom(0), 360, END, () -> enableTungstenOreGeneration && enableOresInEnd),
-	TUNGSTEN_NETHER(4, 10, YOffset.aboveBottom(7), 50, NETHER, () -> enableTungstenOreGeneration && !enableOresInEnd), // why this is always false if ore gen is true and enableOresInEnd is false?
+	TUNGSTEN_END(6, 3, YOffset.aboveBottom(0), 360, END, () -> (enableTungstenOreGeneration && enableOresInEnd)),
+	TUNGSTEN_NETHER(4, 10, YOffset.aboveBottom(7), 50, NETHER, () -> (enableTungstenOreGeneration && !enableOresInEnd)), // why this is always false if ore gen is true and enableOresInEnd is false?
 
 	NICKEL(7, 10, YOffset.fixed(110), 200, OVERWORLD, () -> enableNickelOreGeneration),
 
-	SODALITE_END(6, 4, YOffset.aboveBottom(0), 360, END, () -> enableSodaliteOreGeneration && enableOresInEnd),
-	SODALITE_OVERWORLD(5, 7, YOffset.aboveBottom(5), -15, OVERWORLD, () -> enableSodaliteOreGeneration && !enableOresInEnd),
+	SODALITE_END(6, 4, YOffset.aboveBottom(0), 360, END, () -> (enableSodaliteOreGeneration && enableOresInEnd)),
+	SODALITE_OVERWORLD(5, 7, YOffset.aboveBottom(5), -15, OVERWORLD, () -> (enableSodaliteOreGeneration && !enableOresInEnd)),
 
-	SHELDONITE_END(6, 4, YOffset.aboveBottom(0), 360, END, () -> enableSheldoniteOreGeneration && enableOresInEnd),
-	SHELDONITE_NETHER(4, 9, YOffset.belowTop(45), 300, NETHER, () -> enableSheldoniteOreGeneration),
+	SHELDONITE_END(6, 4, YOffset.aboveBottom(0), 360, END, () -> (enableSheldoniteOreGeneration && enableOresInEnd)),
+	SHELDONITE_NETHER(4, 9, YOffset.belowTop(45), 300, NETHER, () -> (enableSheldoniteOreGeneration && !enableOresInEnd)),
 	DUMMY_NONE(4, 9, YOffset.belowTop(45), 300, OVERWORLD, () -> false);
 
 	static {
@@ -75,7 +75,7 @@ public enum OreDistribution {
 	}
 
 	public final int veinSize;
-	private final int veinsPerChunk;
+	public final int veinsPerChunk;
 	public final YOffset minOffset;
 	public final int maxY; // Max height of ore in numbers of blocks from the bottom of the world
 	public final UniformIntProvider experienceDropped;
@@ -101,11 +101,12 @@ public enum OreDistribution {
 		return generating;
 	}
 
-	public int getVeinsPerChunk() {
-		return isGenerating().get() ? veinsPerChunk : 0;
-	}
-
 	public Predicate<BiomeSelectionContext> GetBiomeSelector() {
+		//if (!isGenerating().get()) // a dumb structure to make unplaceable biome for runtime gen.
+		//	return BiomeSelectors
+		//		.includeByKey(BiomeKeys.BASALT_DELTAS)
+		//		.and(BiomeSelectors.includeByKey(BiomeKeys.BAMBOO_JUNGLE));
+
 		if (biomeSelector == null)
 			return this.dimension.biomeSelector;
 		else

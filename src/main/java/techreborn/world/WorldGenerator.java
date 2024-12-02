@@ -101,7 +101,10 @@ public class WorldGenerator {
 				return;
 			}
 
-			for (TROreFeatureConfig feature : GetOreFeatures()) {
+			for (TROreFeatureConfig feature : GetOreFeatures()
+				.stream()
+				.filter(f->f.isOn())
+				.toList()) {
 				if (feature.biomeSelector().test(biomeSelectionContext)) {
 					biomeModificationContext.getGenerationSettings().addFeature(GenerationStep.Feature.UNDERGROUND_ORES, feature.placedFeature());
 				}
