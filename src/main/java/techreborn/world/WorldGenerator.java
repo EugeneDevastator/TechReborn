@@ -59,7 +59,7 @@ public class WorldGenerator {
 		return ORE_FEATURES_IN;
 	}
 
-	static List<TROreFeatureConfig> ORE_FEATURES_IN = collectOreFeatures();
+	static List<TROreFeatureConfig> ORE_FEATURES_IN = null;
 
 	public static final Identifier OIL_LAKE_ID = Identifier.of("techreborn", "oil_lake");
 	public static final RegistryKey<ConfiguredFeature<?, ?>> OIL_LAKE_FEATURE = RegistryKey.of(RegistryKeys.CONFIGURED_FEATURE, OIL_LAKE_ID);
