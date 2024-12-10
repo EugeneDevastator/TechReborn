@@ -742,7 +742,7 @@ public class TechRebornConfig {
 	public static boolean enableLeadOreGeneration = true;
 
 	@Config(config = "world", category = "generation", key = "enableNickelOreGeneration", comment = "When enabled and enableOreGeneration isn't disabled, nickel ores will generate in the world")
-	public static boolean enableNickelOreGeneration = true;
+	public static boolean enableNickelOreGeneration = false;
 
 	@Config(config = "world", category = "generation", key = "enablePeridotOreGeneration", comment = "When enabled and enableOreGeneration isn't disabled, peridot ores will generate in the world")
 	public static boolean enablePeridotOreGeneration = true;
